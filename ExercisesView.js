@@ -124,7 +124,7 @@ class ExercisesView extends React.Component {
                             <ScrollView style={styles.mainContainer} contentContainerStyle={{ flexGrow: 11, justifyContent: 'center', alignItems: "center" }}>
                                 <Text style={styles.header}>Add Exercise</Text>
                                     <View>
-                                        <Text style={{ textAlignVertical: "center", fontWeight: "700" }}>Exercise Name</Text>
+                                        <Text style={{ textAlignVertical: "center", fontWeight: "700" }} accessibilityHint="Enter the name of the exercise below.">Exercise Name</Text>
                                         </View>
                                         <TextInput style={styles.input}
                                         underlineColorAndroid="transparent"
@@ -132,11 +132,13 @@ class ExercisesView extends React.Component {
                                         placeholderTextColor="#d9bebd"
                                         value={this.state.name}
                                         onChangeText={(name) => this.setState({ name: name })}
-                                        autoCapitalize="none" />
+                                        autoCapitalize="none" 
+                                        accessibilityLabel="Please enter the name of your new activity here."
+                                        />
                                     <View style={styles.spaceSmall}></View>
 
                                     <View>
-                                        <Text style={{ textAlignVertical: "center", fontWeight: "700" }}>Duration (minutes)</Text>
+                                        <Text style={{ textAlignVertical: "center", fontWeight: "700" }} accessibilityHint="Enter the duration below">Duration (minutes)</Text>
                                     </View>
                                     <TextInput style={styles.input}
                                         underlineColorAndroid="transparent"
@@ -145,13 +147,14 @@ class ExercisesView extends React.Component {
                                         onChangeText={(duration) => this.setState({ duration: duration })}
                                         autoCapitalize="none"
                                         keyboardType={'numeric'}
+                                        accessibilityLabel="Please enter the duration here."
                                     >
                                         {this.state.duration}
                                     </TextInput>
                                     <View style={styles.spaceSmall}></View>
 
                                     <View>
-                                        <Text style={{ textAlignVertical: "center", fontWeight: "700" }}>Calories Burnt</Text>
+                                        <Text style={{ textAlignVertical: "center", fontWeight: "700" }} accessibilityLabel="Enter the calories burnt below.">Calories Burnt</Text>
                                     </View>
                                     <TextInput style={styles.input}
                                         underlineColorAndroid="transparent"
@@ -160,6 +163,7 @@ class ExercisesView extends React.Component {
                                         onChangeText={(calories) => this.setState({ calories: calories })}
                                         autoCapitalize="none"
                                         keyboardType={'numeric'}
+                                        accessibilityHint="Please enter the calories burnt here."
                                     >
                                         {this.state.calories}
                                     </TextInput>
@@ -170,7 +174,13 @@ class ExercisesView extends React.Component {
                                     </View>
                                     {this.getDateAndTime()}
                                     
-                                    <DatePicker
+                                    <View
+                                    accessible={true}
+                                    accessibilityLabel="Please enter the date and time here"
+                                    accessibilityRole="adjustable"   
+                                    accessibilityHint="tap here to pick the time and date"
+                                    >
+                                        <DatePicker
                                         style={styles.datePickerStyle}
                                         date={this.state.date} // Initial date from state
                                         mode="datetime" // The enum of date, datetime and time
@@ -194,13 +204,17 @@ class ExercisesView extends React.Component {
                                         onDateChange={(date, time) => {
                                             this.setState({date: time});
                                         }}
-                                    />
+                                        />
+                                    </View>
+                
                                     <View style={styles.spaceSmall}></View>
 
                                     <View style={{ flexDirection: 'row', textlign: 'center', justifyContent: 'space-around', marginBottom: 30}}>
                                         <TouchableOpacity
                                             style={styles.button}
                                             onPress={() => this.closeEditModal()}
+                                            accessible={true}
+                                            accessibilityRole="button"
                                         >
                                             <Text style={{color: 'white', textAlign: 'center'}}>Cancel</Text>
                                         </TouchableOpacity>
@@ -216,6 +230,7 @@ class ExercisesView extends React.Component {
                                                 
                                                 this.editActivity();
                                                 }}
+                                                accessibilityRole="button"
                                              >
                                                  <Text style={{color: 'white', textAlign: 'center'}}>Edit</Text>
                                             </TouchableOpacity>
@@ -226,6 +241,7 @@ class ExercisesView extends React.Component {
                                                 
                                                 this.addActivity();
                                                 }}
+                                                accessibilityRole="button"
                                              >
                                                  <Text style={{color: 'white', textAlign: 'center'}}>Add</Text>
                                             </TouchableOpacity>
@@ -239,7 +255,7 @@ class ExercisesView extends React.Component {
                 </Modal>
 
                 <View style={styles.space} />
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }} accessible={true} accessibilityHint="Scroll down to view all of your exercises.">
                     <Ionicons name="md-walk" size={40} color="#900" style={{ marginRight: 20 }} />
                     <Text style={styles.bigText}>Exercises</Text>
                 </View>
@@ -247,7 +263,7 @@ class ExercisesView extends React.Component {
                 <Text style={{marginTop: 10}}>Let's get to work!</Text>
                 <Text style={{marginBottom: 10}}>Record your exercises below.</Text>
 
-                <TouchableOpacity style={styles.button} onPress={() => {this.setModalVisible(true);}}>
+                <TouchableOpacity style={styles.button} onPress={() => {this.setModalVisible(true);}} accessibilityRole="button">
                     <Text style={{color: '#FFF'}}>ADD EXERCISE</Text>
                 </TouchableOpacity>
 

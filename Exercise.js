@@ -19,6 +19,11 @@ class Exercise extends React.Component {
         let newDate = date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
         return <Text>{newDate}</Text>;
     }
+
+    getDateString(date) {
+      date = new Date(date);
+      return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
+    }
     
     handleDelete() {
       this.props.removeActivity(this.props.id);
@@ -28,13 +33,15 @@ class Exercise extends React.Component {
     render() {
         return (
             <View style={styles.box}>
-              <View style={{borderBottomColor: 'black', borderBottomWidth: 1, width: '100%'}}>
-                <Text style={{borderColor: 'black', borderBottomWidth: 1, borderRadius: 10, textAlign: 'center'}}>{this.props.name}</Text>
-              </View>
-              <View style={{marginTop: 10}}>
-                <Text>Date: {this.getDate(this.props.date)}</Text>
-                <Text>Calories Burned: {this.props.calories}</Text>
-                <Text>Duration: {this.props.duration} Minutes</Text>
+              <View accessible={true} accessibilityLabel={'Title: ' + this.props.name + '. Date: ' + this.getDateString(this.props.date) + '. Calories Burnt: ' + this.props.calories + '. Duration: ' + this.props.duration}>
+                <View style={{borderBottomColor: 'black', borderBottomWidth: 1, width: '100%'}}>
+                  <Text style={{borderColor: 'black', borderBottomWidth: 1, borderRadius: 10, textAlign: 'center'}}>{this.props.name}</Text>
+                </View>
+                <View style={{marginTop: 10}}>
+                  <Text>Date: {this.getDate(this.props.date)}</Text>
+                  <Text>Calories Burned: {this.props.calories}</Text>
+                  <Text>Duration: {this.props.duration} Minutes</Text>
+                </View>
               </View>
 
               {
@@ -42,10 +49,10 @@ class Exercise extends React.Component {
                 <View></View>
                 :
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around', marginTop: 10 }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.showEditModal(this.props.id)}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.showEditModal(this.props.id)} accessibilityRole="button">
                     <Text style={{color: 'white'}}>Edit <Ionicons name="md-create" color={'yellow'}></Ionicons></Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.button} onPress={this.handleDelete}>
+                  <TouchableOpacity style={styles.button} onPress={this.handleDelete} accessibilityRole="button">
                     <Text style={{color: 'white'}}>Delete <Ionicons name="ios-trash" color={'red'}></Ionicons></Text>
                   </TouchableOpacity>
                 </View>

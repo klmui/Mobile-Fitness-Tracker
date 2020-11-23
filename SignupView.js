@@ -71,7 +71,8 @@ class SignupView extends React.Component {
           placeholderTextColor="#992a20"
           onChangeText={(username) => this.setState({ username: username })}
           value={this.state.username}
-          autoCapitalize="none" />
+          autoCapitalize="none" 
+          accessibilityHint="Please enter your username here."/>
         <TextInput style={styles.input}
           secureTextEntry={true}
           underlineColorAndroid="transparent"
@@ -79,12 +80,15 @@ class SignupView extends React.Component {
           onChangeText={(password) => this.setState({ password: password })}
           value={this.state.password}
           placeholderTextColor="#992a20"
-          autoCapitalize="none" />
+          autoCapitalize="none" 
+          accessibilityHint="Please enter your password here."/>
         <View style={styles.space} />
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           <Button color="#942a21" style={styles.buttonInline} title="Create Account" onPress={this.handleCreateAccount} />
           <View style={styles.spaceHorizontal} />
-          <Button color="#a1635f" style={styles.buttonInline} title="Nevermind!" onPress={this.backToLogin} />
+          <View accessible={true} accessibilityHint="This will take you to the sign in screen" >
+            <Button color="#a1635f" style={styles.buttonInline} title="Nevermind!" onPress={this.backToLogin}/>          
+          </View>
         </View>
       </View>
     );

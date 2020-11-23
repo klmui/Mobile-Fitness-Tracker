@@ -164,7 +164,10 @@ class App extends React.Component {
    */
   SignoutButton = () => {
     return <>
-      <View style={{ flexDirection: 'row', marginRight: 25 }}>
+      <View style={{ flexDirection: 'row', marginRight: 25 }}
+      accessible={true}
+      accessibilityLabel="Sign out"
+      accessibilityRole="button">
         <TouchableOpacity onPress={() => this.revokeAccessToken()}>
           <Ionicons name="ios-log-out" size={20} style={{marginLeft: 20}} />
         </TouchableOpacity>

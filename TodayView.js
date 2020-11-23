@@ -52,14 +52,17 @@ class TodayView extends React.Component {
     render() {
         return (
             <ScrollView style={styles.mainContainer} contentContainerStyle={{ flexGrow: 11, justifyContent: 'center', alignItems: "center" }}>
-                <Text style={styles.header}><Ionicons name="ios-sunny" size={30} color={'orange'} /> Today: {this.getDate()}</Text>
-                <Text style={{marginTop: 15}}>What's on the agenda for today?</Text>
-                <Text>Below are all of your goals and exercises.</Text>
-
+                <View accessible={true} accessibilityRole="header" accessibilityHint="You are on the today tab. There are two other tabs at the bottom of the screen: exercises and me. Scroll down to hear your goals and exercises. To logout, click the button on the top left of your screen.">
+                    <Text style={styles.header}><Ionicons name="ios-sunny" size={30} color={'orange'} /> Today: {this.getDate()}</Text>                
+                </View>
+                <View accessible={true}>
+                    <Text style={{marginTop: 15, textAlign: 'center'}}>What's on the agenda for today?</Text>
+                    <Text style={{textAlign: 'center'}}>Below are all of your goals and exercises.</Text>
+                </View>
 
                 <GoalView username={this.props.username} accessToken={this.props.accessToken} compareDate={(date) => this.compareDate(date)}></GoalView>
 
-                <Text style={{...styles.header, marginTop: 40}}><Ionicons name="md-walk" size={30} color={'orange'} /> Exercises</Text>
+                <Text style={{...styles.header, marginTop: 40}} accessibilityHint="Scroll down to view all of your exercises for today."><Ionicons name="md-walk" size={30} color={'orange'} accessible={true}/> Exercises</Text>
                 {this.renderExercises()}
 
             </ScrollView>
